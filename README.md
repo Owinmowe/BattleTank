@@ -8,3 +8,4 @@ Commits
 * v0.1 Engine/gitignore setup
 * v0.15 Map created with terrain deformation
 * v0.25 Map Textured, Tank assembled and setup in a BPmode, Camera X-Y setup with a bug
+* v0.3 Camera bug fixed, Basic Main Menu made, Start Button functional
