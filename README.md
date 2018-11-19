@@ -11,4 +11,5 @@ Commits
 * v0.3 Camera bug fixed, Basic Main Menu made, Start Button functional
 * v0.35 Player Controller + Tank Class in C++ made so you can use polymorphism with Player/AI
 * v0.4 AI Controller made in C++, AI can Find and get the player Tank with a GetMethod
-* v0.45 Player Controller finds world position of crosshair using a line trace with a Pixel Screen position with a max range trace line.
+* v0.45 Player Controller finds world position of crosshair using a line trace with a Pixel Screen position with a max range trace line
+* v0.5 Tank BP Deriving to a Tank Aiming Component in C++ That has a set location using the tank barrel position as a start
