@@ -13,3 +13,5 @@ Commits
 * v0.4 AI Controller made in C++, AI can Find and get the player Tank with a GetMethod
 * v0.45 Player Controller finds world position of crosshair using a line trace with a Pixel Screen position with a max range trace line
 * v0.5 Tank BP Deriving to a Tank Aiming Component in C++ That has a set location using the tank barrel position as a start
+* v0.6 Tank has 2 custom Static Mesh for Turret/Barrel. Aim Component searchs for posible position then 
+delegates to Turret/Barrel Component to rotate in the direction needed with a fixed max speed editable

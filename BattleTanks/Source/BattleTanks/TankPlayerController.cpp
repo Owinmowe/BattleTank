@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankPlayerController.h"
+#include "Tank.h"
 
 void ATankPlayerController::BeginPlay()
 {
@@ -12,7 +13,6 @@ void ATankPlayerController::BeginPlay()
 	else
 	{
 		FString TankName = GetControlledTank()->GetName();
-		UE_LOG(LogTemp, Warning, TEXT("The Tank Controlled by the player is %s"), *TankName);
 	}
 }
 
