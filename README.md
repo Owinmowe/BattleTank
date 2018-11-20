@@ -15,3 +15,4 @@ Commits
 * v0.5 Tank BP Deriving to a Tank Aiming Component in C++ That has a set location using the tank barrel position as a start
 * v0.6 Tank has 2 custom Static Mesh for Turret/Barrel. Aim Component searchs for posible position then 
 delegates to Turret/Barrel Component to rotate in the direction needed with a fixed max speed editable
+* v0.65 Fire button added to the game with a Projectile BP made as a placeholder appearing correctly in barrel fire position
