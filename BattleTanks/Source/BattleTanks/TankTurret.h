@@ -8,7 +8,7 @@
 #include "TankTurret.generated.h"
 
 /**
- * 
+ * Class that controls the horizontal movement of the turret.
  */
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent), hidecategories = ("Physics"))
 class BATTLETANKS_API UTankTurret : public UStaticMeshComponent

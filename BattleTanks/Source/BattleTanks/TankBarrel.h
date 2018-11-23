@@ -8,7 +8,7 @@
 #include "TankBarrel.generated.h"
 
 /**
- * 
+ * Class that control speed and maximun/minimun elevation of the barrel.
  */
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent), hidecategories = ("Physics"))
 class BATTLETANKS_API UTankBarrel : public UStaticMeshComponent

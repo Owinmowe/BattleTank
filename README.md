@@ -17,3 +17,6 @@ Commits
 delegates to Turret/Barrel Component to rotate in the direction needed with a fixed max speed editable
 * v0.65 Fire button added to the game with a Projectile BP made as a placeholder appearing correctly in barrel fire position
 * v0.7 Changed Collision for a simpler form. Changed Tank to improved tank models. TankTrack c++ file Created
+* v0.75 Made a change in blueprint to make meshs/materials autoassing in runtime to bypass a bug in UE 4.20 that
+unassings meshs every Compilation/Change of level. TankTrack added and made new collision to fall on the tracks.
+Input and collision added to the tracks.
