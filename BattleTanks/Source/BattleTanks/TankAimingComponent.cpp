@@ -3,6 +3,7 @@
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
+#include "Projectile.h"
 
 // Called when the game starts
 void UTankAimingComponent::BeginPlay()
@@ -11,6 +12,13 @@ void UTankAimingComponent::BeginPlay()
 
 	// ...
 
+}
+
+void UTankAimingComponent::Initialize(UTankBarrel * BarrelToSet, UTankTurret * TurretToSet)
+{
+	if (!ensure(BarrelToSet && TurretToSet)) { return; }
+	Barrel = BarrelToSet;
+	Turret = TurretToSet;
 }
 
 // Called every frame
@@ -32,9 +40,9 @@ UTankAimingComponent::UTankAimingComponent()
 }
 
 
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
+void UTankAimingComponent::AimAt(FVector HitLocation)
 {
-	if (!Barrel) { return; }
+	if (!ensure(Barrel)) { return; }
 	FVector LaunchVelocity;
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity
 	(
@@ -56,20 +64,9 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	}
 }
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
-{
-	if (!BarrelToSet) { return; }
-	Barrel = BarrelToSet;
-}
-
-void UTankAimingComponent::SetTurretReference(UTankTurret * TurretToSet)
-{
-	if (!TurretToSet) { return; }
-	Turret = TurretToSet;
-}
-
 void UTankAimingComponent::MoveAimTowards(FVector AimDirection)
 {
+	if (!ensure(Barrel && Turret)) { return; }
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
@@ -82,6 +79,23 @@ void UTankAimingComponent::MoveAimTowards(FVector AimDirection)
 	else
 	{
 		Turret->Rotate(-DeltaRotator.Yaw);
+	}
+}
+
+void UTankAimingComponent::Fire()
+{
+	bool isReloaded = (GetWorld()->GetTimeSeconds() - LastFireTime) > ReloadTimeInSeconds;
+
+	if (!ensure(Barrel && ProjectileBlueprint)) { return; }
+
+	if (isReloaded)
+	{
+		LastFireTime = GetWorld()->GetTimeSeconds();
+		auto SocketLocation = Barrel->GetSocketLocation(FName("FiringLocation"));
+		auto SocketRotation = Barrel->GetSocketRotation(FName("FiringLocation"));
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, SocketLocation, SocketRotation);
+
+		Projectile->LaunchProjectile(LaunchSpeed);
 	}
 }
 

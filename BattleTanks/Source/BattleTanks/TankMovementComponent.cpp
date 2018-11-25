@@ -19,12 +19,12 @@ void UTankMovementComponent::IntendRotate(float Throw)
 
 void UTankMovementComponent::Initialize(UTankTrack * LeftTrackToSet, UTankTrack * RightTrackToSet, USnowParticleSystemComponent * SPSToSet)
 {
-	if (!LeftTrackToSet || !RightTrackToSet) { return; }
+	if (!ensure(LeftTrackToSet && RightTrackToSet)) { return; }
 	
 	LeftTrack = LeftTrackToSet;
 	RightTrack = RightTrackToSet;
 
-	if (!SPSToSet) { return; }
+	if (!ensure(SPSToSet)) { return; }
 
 	SPS = SPSToSet;
 }
