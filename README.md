@@ -20,3 +20,4 @@ delegates to Turret/Barrel Component to rotate in the direction needed with a fi
 * v0.75 Made a change in blueprint to make meshs/materials autoassing in runtime to bypass a bug in UE 4.20 that
 unassings meshs every Compilation/Change of level. TankTrack added and made new collision to fall on the tracks.
 Input and collision added to the tracks.
+* v0.85 Snow Particle System added, moving tank with rotation and AI pathfinding integrated.
