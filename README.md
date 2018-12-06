@@ -23,3 +23,5 @@ Input and collision added to the tracks
 * v0.85 Snow Particle System added, moving tank with rotation and AI pathfinding integrated
 * v0.9 Introducced ice Texture in the ground, refactored to a new architecture with Less dependency and added a spike in the middle to test
 tank pathfinding
+* v0.95 Removed Spike and snow particle to create a posible generic effect in newer versions.
+ Created tank sideway friction to stop sliding. Improved AI efficiency and created a placeholder ground turret that shoots without moving.

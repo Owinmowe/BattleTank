@@ -2,13 +2,11 @@
 
 #include "TankMovementComponent.h"
 #include "TankTrack.h"
-#include "SnowParticleSystemComponent.h"
 
 void UTankMovementComponent::IntendMoveFoward(float Throw)
 {
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
-	SPS->ChangePosition(GetOwner()->GetActorLocation());
 }
 
 void UTankMovementComponent::IntendRotate(float Throw)
@@ -17,16 +15,12 @@ void UTankMovementComponent::IntendRotate(float Throw)
 	RightTrack->SetThrottle(-Throw);
 }
 
-void UTankMovementComponent::Initialize(UTankTrack * LeftTrackToSet, UTankTrack * RightTrackToSet, USnowParticleSystemComponent * SPSToSet)
+void UTankMovementComponent::Initialize(UTankTrack * LeftTrackToSet, UTankTrack * RightTrackToSet)
 {
 	if (!ensure(LeftTrackToSet && RightTrackToSet)) { return; }
 	
 	LeftTrack = LeftTrackToSet;
 	RightTrack = RightTrackToSet;
-
-	if (!ensure(SPSToSet)) { return; }
-
-	SPS = SPSToSet;
 }
 
 void UTankMovementComponent::RequestDirectMove(const FVector & MoveVelocity, bool bForceMaxSpeed)

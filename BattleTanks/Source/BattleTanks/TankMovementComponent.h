@@ -7,7 +7,6 @@
 #include "TankMovementComponent.generated.h"
 
 class UTankTrack;
-class USnowParticleSystemComponent;
 
 /**
  *  Responsible for driving the tank tracks.
@@ -26,7 +25,7 @@ public:
 	void IntendRotate(float Throw);
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void Initialize(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet, USnowParticleSystemComponent* SPSToSet);
+	void Initialize(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
 	
 private:
 
@@ -34,5 +33,4 @@ private:
 
 	UTankTrack* LeftTrack = nullptr;
 	UTankTrack* RightTrack = nullptr;
-	USnowParticleSystemComponent* SPS = nullptr;
 };

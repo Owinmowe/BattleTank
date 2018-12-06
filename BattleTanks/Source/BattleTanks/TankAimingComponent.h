@@ -4,6 +4,7 @@
 
 #include "Engine/Classes/Kismet/GameplayStatics.h"
 #include "Engine/Classes/Components/StaticMeshComponent.h"
+#include "Runtime/AIModule/Classes/AIController.h"
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
@@ -14,7 +15,7 @@ enum class EFiringState : uint8
 	Reloading,
 	Aiming,
 	Lock,
-	NoTarget
+	OutOfAmmo
 };
 
 class UTankBarrel;
@@ -29,7 +30,7 @@ class BATTLETANKS_API UTankAimingComponent : public UActorComponent
 public:	
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet, TSubclassOf<AProjectile> ProjectileToSet);
 
 	void AimAt(FVector HitLocation);
 
@@ -39,17 +40,31 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	EFiringState GetFiringState() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Ammo")
+	int32 GetCurrentAmmo();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-	EFiringState FiringState = EFiringState::NoTarget;
+	EFiringState FiringState = EFiringState::Reloading;
 
 private:
 
+	void MoveAimTowards(FVector AimDirection);
+
+	bool IsBarrelMoving();
+
+	FVector AimDirection;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 7500;
+	float LaunchSpeed = 12500;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int32 CurrentAmmo = 12;
 
 	// Sets default values for this component's properties
 	UTankAimingComponent();
@@ -58,8 +73,6 @@ private:
 
 	UTankTurret* Turret = nullptr;
 
-	void MoveAimTowards(FVector AimDirection);
-
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTimeInSeconds = 5;
 
@@ -67,5 +80,4 @@ private:
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	float LastFireTime = -5;
-
 };
